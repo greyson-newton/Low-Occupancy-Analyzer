@@ -89,13 +89,7 @@ private:
   nTightMuon = 0.0f;
 };
 Low_Occupancy_Analyzer::Low_Occupancy_Analyzer(const edm::ParameterSet& iConfig)
-{/*   tightMuonProfile = fs->make<TH1D>("TightMuons", "Tight Muons", 7  , 0 , 7);
-   tightMuonProfile->GetXaxis()->SetBinLabel(1, "Global");
-   tightMuonProfile->GetXaxis()->SetBinLabel(2, "StandAlone");
-   tightMuonProfile->GetXaxis()->SetBinLabel(3, "PT");
-   tightMuonProfile->GetXaxis()->SetBinLabel(4, "Stations");
-   tightMuonProfile->GetXaxis()->SetBinLabel(5, "Chi2");
-   tightMuonProfile->GetXaxis()->SetBinLabel(6, "ValidDB");*/
+{
   th1d_tight_muon = fs->make<TH1D>("TightMuons", "Tight Muons", 7  , 0 , 7);
   th1d_tight_muon->GetXaxis()->SetBinLabel(1, "Global");
   th1d_tight_muon->GetXaxis()->SetBinLabel(2, "StandAlone");
@@ -171,11 +165,7 @@ Low_Occupancy_Analyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
       GlobalPoint tsosGP_inner = tsos_inner.globalPosition();
 
       if (tsosGP.eta() * mu->eta() < 0.0) continue;
-/*      const LocalPoint pos = ch->toLocal(tsosGP);
-      const LocalPoint pos2D(pos.x(), pos.y(), 0);
-      const LocalPoint pos_gt = ch->toLocal(tsosGP_gt);
-      const LocalPoint pos_inner = ch->toLocal(tsosGP_inner);
-      const BoundPlane& bps(ch->surface()); */
+      
       if (matchMuonwithCSCRechit_ and hasCSCRechitcollection) for (auto hit = cscRecHits->begin(); hit != cscRecHits->end(); hit++) 
       {
         if ((hit)->geographicalId().det() == DetId::Detector::Muon && (hit)->geographicalId().subdetId() == MuonSubdetId::CSC)
